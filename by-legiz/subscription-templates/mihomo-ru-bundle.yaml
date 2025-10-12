@@ -76,6 +76,12 @@ proxy-groups:
     proxies:
       - 🌍 VPN
       # LEAVE THIS LINE!
+  - name: ➤ Telegram
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
+    type: select
+    proxies:
+      - 🌍 VPN
+      # LEAVE THIS LINE!
   - name: ⚡️ Fastest
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
     type: url-test
@@ -181,3 +187,4 @@ rules:
   - RULE-SET,refilter_domains,🌍 VPN
   - RULE-SET,refilter_ipsum,🌍 VPN
   - MATCH,DIRECT
+  
