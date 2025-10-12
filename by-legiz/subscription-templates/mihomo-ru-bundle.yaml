@@ -76,7 +76,7 @@ proxy-groups:
     proxies:
       - 🌍 VPN
       # LEAVE THIS LINE!
-  - name: ➤ Telegram
+  - name: 🚀 Telegram
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
     type: select
     proxies:
