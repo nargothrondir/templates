@@ -75,12 +75,14 @@ proxy-groups:
     type: select
     proxies:
       - 🌍 VPN
+      - 🔓 No proxy
       # LEAVE THIS LINE!
   - name: 🚀 Telegram
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
     type: select
     proxies:
       - 🌍 VPN
+      - 🔓 No proxy
       # LEAVE THIS LINE!
   - name: ⚡️ Fastest
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
@@ -98,12 +100,13 @@ proxy-groups:
     proxies:
       # LEAVE THIS LINE!
   - name: 🔓 No proxy
-      remnawave:
-          include-proxies: false # Excludes all proxies
-      type: select
-      hidden: true
-      proxies:
-          - DIRECT # Direct connection only  
+    remnawave:
+    include-proxies: false # Excludes all proxies
+    type: select
+    hidden: true
+    proxies:
+      - DIRECT # Direct connection only
+      # LEAVE THIS LINE!
 
 rule-providers:
   telegram_ips:
