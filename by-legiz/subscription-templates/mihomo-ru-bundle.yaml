@@ -97,6 +97,13 @@ proxy-groups:
     interval: 300
     proxies:
       # LEAVE THIS LINE!
+  - name: 🔓 No proxy
+      remnawave:
+          include-proxies: false # Excludes all proxies
+      type: select
+      hidden: true
+      proxies:
+          - DIRECT # Direct connection only  
 
 rule-providers:
   telegram_ips:
