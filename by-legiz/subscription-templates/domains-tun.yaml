@@ -7,5 +7,5 @@ payload:
   - ipinfo.io
   # Прочие ресурсы
   - '+.patreon.com'
-  - foundryvtt.store
+  - '+.foundryvtt.store'
   - '+.foundryvtt.com'
