@@ -4,7 +4,8 @@ on:
     branches:
       - main
     paths:
-      - 'my-domen/*.yaml' # Запуск только при изменении твоих списков
+      - 'my-domen/*.yaml'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,7 +15,6 @@ jobs:
 
       - name: Download Mihomo
         run: |
-          # Скачиваем актуальную версию для компиляции
           wget https://github.com/MetaCubeX/mihomo/releases/download/v1.18.9/mihomo-linux-amd64-v1.18.9.gz
           gunzip mihomo-linux-amd64-v1.18.9.gz
           chmod +x mihomo-linux-amd64-v1.18.9
@@ -22,14 +22,13 @@ jobs:
       - name: Compile Rules
         run: |
           mkdir -p output/my-domen
-          # Проходим по всем yaml в твоей папке и создаем mrs
-          for file in my-domen/*.yaml; do
-            ./mihomo-linux-amd64-v1.18.9 rule-set compile "$file" "output/${file%.yaml}.mrs"
-          done
+          # Прямые команды компиляции без циклов, чтобы не зависало
+          ./mihomo-linux-amd64-v1.18.9 rule-set compile "my-domen/proxy.yaml" "output/my-domen/proxy.mrs"
+          ./mihomo-linux-amd64-v1.18.9 rule-set compile "my-domen/direct.yaml" "output/my-domen/direct.mrs"
 
       - name: Deploy to Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./output
-          publish_branch: release # Результат будет лежать здесь
+          publish_branch: release
