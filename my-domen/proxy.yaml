@@ -1,10 +1,10 @@
 payload:
   # Сервисы определения IP
-  - ipwhois.app
-  - ipwho.is
-  - api.ip.sb
-  - ipapi.co
-  - ipinfo.io
+  - 'ipwhois.app'
+  - 'ipwho.is'
+  - 'api.ip.sb'
+  - 'ipapi.co'
+  - 'ipinfo.io'
   # Прочие ресурсы
   - '+.patreon.com'
   - '+.foundryvtt.store'
