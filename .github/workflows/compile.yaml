@@ -1,0 +1,35 @@
+name: Compile Rules to MRS
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'my-domen/*.yaml' # Запуск только при изменении твоих списков
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Mihomo
+        run: |
+          # Скачиваем актуальную версию для компиляции
+          wget https://github.com/MetaCubeX/mihomo/releases/download/v1.18.9/mihomo-linux-amd64-v1.18.9.gz
+          gunzip mihomo-linux-amd64-v1.18.9.gz
+          chmod +x mihomo-linux-amd64-v1.18.9
+
+      - name: Compile Rules
+        run: |
+          mkdir -p output/my-domen
+          # Проходим по всем yaml в твоей папке и создаем mrs
+          for file in my-domen/*.yaml; do
+            ./mihomo-linux-amd64-v1.18.9 rule-set compile "$file" "output/${file%.yaml}.mrs"
+          done
+
+      - name: Deploy to Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          publish_branch: release # Результат будет лежать здесь
