@@ -5,7 +5,7 @@ on:
     paths:
       - 'my-domen/*.yaml'
       - 'my-domen/*.yml'
-  workflow_dispatch:  # можно запустить вручную
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -31,11 +31,21 @@ jobs:
 
       - name: Download & setup Mihomo
         run: |
-          wget -q "https://github.com/MetaCubeX/mihomo/releases/download/v${{ steps.version.outputs.ver }}/mihomo-linux-amd64-compatible-v${{ steps.version.outputs.ver }}.gz" -O mihomo.gz
+          VER=${{ steps.version.outputs.ver }}
+          echo "Downloading Mihomo v$VER..."
+          wget -q "https://github.com/MetaCubeX/mihomo/releases/download/v${VER}/mihomo-linux-amd64-compatible-v${VER}.gz" -O mihomo.gz
           gzip -d mihomo.gz
+          
+          # Исправляем имя файла после распаковки
+          mv mihomo-linux-amd64-compatible-v${VER} mihomo 2>/dev/null || true
           chmod +x mihomo
+
           echo "Mihomo version check:"
-          ./mihomo version
+          ./mihomo -v
+          
+          # На всякий случай убиваем процесс (чтобы не запустился как демон)
+          pkill -f mihomo 2>/dev/null || true
+          echo "✅ Mihomo ready for ruleset conversion"
 
       - name: Convert all YAML to MRS (domain behavior)
         run: |
@@ -57,4 +67,3 @@ jobs:
           file_pattern: 'my-domen/*.mrs'
           commit_user_name: github-actions[bot]
           commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
-          skip_dirty_check: false
