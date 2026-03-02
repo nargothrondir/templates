@@ -75,14 +75,6 @@ proxy-groups:
     type: select
     proxies:
       - 🌍 VPN
-      - 🔓 No proxy
-      # LEAVE THIS LINE!
-  - name: 🚀 Telegram
-    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
-    type: select
-    proxies:
-      - 🌍 VPN
-      - 🔓 No proxy
       # LEAVE THIS LINE!
   - name: ⚡️ Fastest
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
@@ -99,44 +91,34 @@ proxy-groups:
     interval: 300
     proxies:
       # LEAVE THIS LINE!
-  - name: 🔓 No proxy
-    remnawave:
-    include-proxies: false # Excludes all proxies
-    type: select
-    hidden: true
-    proxies:
-      - DIRECT # Direct connection only
-      # LEAVE THIS LINE!
 
 rule-providers:
   telegram_ips:
     type: http
     behavior: ipcidr
     format: mrs
+    interval: 86400
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geoip/telegram.mrs
     path: ./rule-sets/telegram_ips.mrs
-    interval: 86400
   telegram_domains:
     type: http
     behavior: domain
     format: mrs
+    interval: 86400
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/telegram.mrs
     path: ./rule-sets/telegram_domains.mrs
-    interval: 86400
   discord_domains:
     type: http
     behavior: domain
     format: mrs
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/discord.mrs
     path: ./rule-sets/discord_domains.mrs
-    interval: 86400
   discord_voiceips:
     type: http
     behavior: ipcidr
     format: mrs
     url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/discord-voice-ip-list.mrs
     path: ./rule-sets/discord_voiceips.mrs
-    interval: 86400
   refilter_domains:
     type: http
     behavior: domain
@@ -157,14 +139,12 @@ rule-providers:
     format: mrs
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs
     path: ./rule-sets/youtube.mrs
-    interval: 86400
   oisd_big:
     type: http
     behavior: domain
     format: mrs
     url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs
     path: ./oisd/big.mrs
-    interval: 86400
   torrent-trackers:
     type: http
     behavior: domain
@@ -197,4 +177,3 @@ rules:
   - RULE-SET,refilter_domains,🌍 VPN
   - RULE-SET,refilter_ipsum,🌍 VPN
   - MATCH,DIRECT
-  
